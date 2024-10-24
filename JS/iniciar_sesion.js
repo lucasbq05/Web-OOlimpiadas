@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Credenciales de acceso
+
+    console.log("Entra click")
     const users = {
-        admin: 'admin123',
+        admin: 'admin',
         empleado: 'empleado',
     };
 
@@ -49,15 +51,17 @@ document.addEventListener('DOMContentLoaded', function() {
             adminModal.style.display = 'none';
         }
     });
-});
 
+
+});
 document.addEventListener('DOMContentLoaded', function() {
     const ticketForm = document.getElementById('ticketForm');
     const ticketTitle = document.getElementById('ticketTitle');
     const ticketDescription = document.getElementById('ticketDescription');
-    const ticketsUl = document.getElementById('tickets');
+    const ticketsUl = document.getElementsByClassName("tickets");
     const clearTicketsButton = document.getElementById('clearTickets');
 
+    console.log("cargan tickets")
     // Cargar tickets desde el almacenamiento local
     loadTickets();
 
@@ -89,6 +93,13 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.removeItem('tickets');
         loadTickets();
     });
+
+    function saveTicket(ticket) {
+        let tickets = getTicketsFromStorage();
+        tickets.push(ticket);
+        localStorage.setItem('tickets', JSON.stringify(tickets));
+        loadTickets();
+    }
 
     function saveTicket(ticket) {
         let tickets = getTicketsFromStorage();
@@ -139,27 +150,45 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function loadTickets() {
-        const tickets = getTicketsFromStorage();
-        ticketsUl.innerHTML = '';
-        tickets.forEach((ticket, index) => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <strong>${ticket.title}</strong>
-                <p>${ticket.description}</p>
-                <span class="mark-as-seen${ticket.seen ? ' seen' : ''}" data-index="${index}">
+
+        for(var i = 0; i < ticketsUl.length; i++) {
+
+            const tickets = getTicketsFromStorage();
+            ticketsUl[i].innerHTML = '';
+            tickets.forEach((ticket, index) => {
+
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <strong>${ticket.title}</strong>
+                    <p>${ticket.description}</p>
+                    
+                `;
+
+                    console.log("entra admin")
+                    li.innerHTML +=             `
+                    <span class="mark-as-seen${ticket.seen ? ' seen' : ''}" data-index="${index}">
                     ${ticket.seen ? '✓' : '✗'}
-                </span>
-            `;
-            ticketsUl.appendChild(li);
-        });
+                    </span>
+                    `;
         
-        // Agregar listeners a los botones de "marcar como visto"
-        document.querySelectorAll('.mark-as-seen').forEach(button => {
-            button.addEventListener('click', function() {
-                const index = this.getAttribute('data-index');
-                markAsSeen(index);
+                ticketsUl[i].appendChild(li);
             });
-        });
+            
+            // Agregar listeners a los botones de "marcar como visto"
+
+            document.querySelectorAll('.mark-as-seen').forEach(button => {
+                button.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    markAsSeen(index);
+                });
+            });
+    }
+//arreglar no poner voton de seen 
+
+
+
+
+
     }
 
     function markAsSeen(index) {

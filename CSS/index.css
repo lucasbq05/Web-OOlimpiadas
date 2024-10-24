@@ -2,19 +2,14 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #007BFF;
 }
 
 header {
     background-color: #333;
     color: white;
-    padding: 10px 0;
+    padding: 10px ;
     text-align: center;
-}
-
-header nav ul {
-    list-style: none;
-    padding: 0;
 }
 
 header nav ul li {
@@ -30,7 +25,8 @@ header nav ul li a {
 .hero {
     background-color: #007BFF;
     color: white;
-    padding: 50px 20px;
+    padding: 60px;
+    margin: 3%;
     text-align: center;
 }
 
@@ -42,19 +38,9 @@ header nav ul li a {
     font-size: 1.25rem;
 }
 
-.cta {
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    display: inline-block;
-}
-
 .services {
-    padding: 20px;
-    background-color: white;
+    padding: 5px;
+    background-color: #292929;
 }
 
 .services h2 {
@@ -63,16 +49,22 @@ header nav ul li a {
 }
 
 .service-item {
-    margin: 15px 0;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    margin-top: 100%;
+    margin: 10px;
+    padding: 4px;
 }
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
+.social-icons a {
+    margin-left: 30%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    background: transparent;
+    border: 2px solid var(--main-color);
+    font-size: 2.5rem;
+    border-radius: 50%;
+    color: var(--main-color);
+    margin: 3rem 1.5rem 3rem;
+    transition: 0.3s  ease-in-out;
 }
